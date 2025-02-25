@@ -95,7 +95,7 @@ class Hub:
                 params.append(human_message)
             if structured_output is not None:
                 fields.append("structured_output = %s" if self.db.db_type == "postgres" else "structured_output = ?")
-                params.append(1 if structured_output else 0)
+                params.append(structured_output if self.db.db_type == "postgres" else (1 if structured_output else 0))
             if output_format is not None:
                 fields.append("output_format = %s" if self.db.db_type == "postgres" else "output_format = ?")
                 params.append(output_format)
